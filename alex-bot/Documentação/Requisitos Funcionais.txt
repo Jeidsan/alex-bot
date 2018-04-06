@@ -1,0 +1,22 @@
+REQUISITOS FUNCIONAIS:
+
+Sobre a forma de interação com o usuário:
+
+	RF001 - O sistema deve interagir com o usuário através de texto escrito;
+	RF002 - O sistema deve interagir com o usuário através de imagens;
+	RF003 - O sistema deve interagir com o usuário através de hiperlinks;
+	RF004 - O sistema deve permitir que o usuário envie mensagens de áudio;
+
+Sobre a área administrativa:
+
+	RF005 - O sistema deve possuir uma interface administrativa;
+
+Sobre a base de dados: 
+
+	RF006 - O sistema deve manter o cadastro de temas;
+	RF007 - O sistema deve manter o cadastro de perguntas;
+	RF008 - O sistema deve manter o cadastro de respostas;
+	RF009 - O sistema deve manter o cadastro de redes de testagem e aconselhamento;
+	RF010 - O sistema deve manter o cadastro de administradores;
+	RF011 - O sistema deve permitir a classificação das imagens e vídeos mantidas no sistema como adequadas ou não;
+

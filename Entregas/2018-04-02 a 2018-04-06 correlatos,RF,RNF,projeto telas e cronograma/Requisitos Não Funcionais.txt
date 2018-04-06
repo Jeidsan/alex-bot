@@ -1,0 +1,21 @@
+REQUISITOS NÃO FUNCIONAIS:
+
+Sobre o acesso, a segurança e a privacidade:
+
+	RNF001 - O acesso à área administrativa deve ser autenticada por usuário e senha e restrita a administradores;
+	RNF002 - Os usuários devem interagir com o sistema de modo anônimo, isto é, nenhuma informação que possa identificar o usuário deve ser salva;
+
+Sobre restrições de conteúdo:
+
+	RNF003 - O sistema NÃO deve exibir ao usuário vídeos ou imagens classificadas como inadequadas;
+
+Sobre a linguagem padrão de interação:
+
+	RNF004 - O sistema deve interagir com o usuário utilizando o português brasileiro;
+
+Sobre os canais de interação:
+
+	RNF005 - O sistema deve estar acessível através do Telegram;
+	RNF006 - O sistema deve estar acessível através do Skype;
+	RNF007 - O sistema deve estar acessível através de uma API publicada na web;
+	RNF008 - A interface administrativa do sistema deve ser acessível via web browser;
