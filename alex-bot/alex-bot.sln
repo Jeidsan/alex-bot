@@ -4,13 +4,64 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 15.0.27428.2002
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentação", "Documentação", "{F4CEC82F-F1B3-432D-9C1A-B362EA86D2C7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Outros", "Outros", "{C59B88DE-0D25-4304-A81C-35B61BFE4A9D}"
 	ProjectSection(SolutionItems) = preProject
-		Documentação\Cronograma.txt = Documentação\Cronograma.txt
+		Documentação\Outros\Alex, the bot.docx = Documentação\Outros\Alex, the bot.docx
+		Documentação\Outros\Correlatos.txt = Documentação\Outros\Correlatos.txt
+		Documentação\Outros\Cronograma.txt = Documentação\Outros\Cronograma.txt
+		Documentação\Outros\Cronograma.xlsx = Documentação\Outros\Cronograma.xlsx
+		Documentação\Outros\modelo.xml = Documentação\Outros\modelo.xml
+		Documentação\Outros\Requisitos Funcionais.txt = Documentação\Outros\Requisitos Funcionais.txt
+		Documentação\Outros\Requisitos Não Funcionais.txt = Documentação\Outros\Requisitos Não Funcionais.txt
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modelos e Diagramas", "Modelos e Diagramas", "{BF395733-20E2-43AF-9FC2-2509680BBEB2}"
+	ProjectSection(SolutionItems) = preProject
+		Documentação\Modelos e Diagramas\Alex, the bot.asta = Documentação\Modelos e Diagramas\Alex, the bot.asta
+		Documentação\Modelos e Diagramas\Diagrama de Casos de Uso.png = Documentação\Modelos e Diagramas\Diagrama de Casos de Uso.png
+		Documentação\Modelos e Diagramas\Diagrama de Classes.png = Documentação\Modelos e Diagramas\Diagrama de Classes.png
+		Documentação\Modelos e Diagramas\Modelo Entidade-Relacionamento.png = Documentação\Modelos e Diagramas\Modelo Entidade-Relacionamento.png
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Proposta Comercial", "Proposta Comercial", "{36DB66AD-1193-41C6-9AEF-592A95286B9D}"
+	ProjectSection(SolutionItems) = preProject
+		Documentação\Proposta Comercial\Proposta Comercial.docx = Documentação\Proposta Comercial\Proposta Comercial.docx
+		Documentação\Proposta Comercial\Proposta Comercial.pdf = Documentação\Proposta Comercial\Proposta Comercial.pdf
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Protótipos de telas", "Protótipos de telas", "{34B72F73-6AE1-455B-BD88-59A61995D736}"
+	ProjectSection(SolutionItems) = preProject
+		Documentação\Protótipos de telas\administrador.png = Documentação\Protótipos de telas\administrador.png
+		Documentação\Protótipos de telas\administradores.png = Documentação\Protótipos de telas\administradores.png
+		Documentação\Protótipos de telas\anexo.png = Documentação\Protótipos de telas\anexo.png
+		Documentação\Protótipos de telas\atualizao_confirmao.png = Documentação\Protótipos de telas\atualizao_confirmao.png
+		Documentação\Protótipos de telas\atualizao_processamento.png = Documentação\Protótipos de telas\atualizao_processamento.png
+		Documentação\Protótipos de telas\consulta_de_administradores.png = Documentação\Protótipos de telas\consulta_de_administradores.png
+		Documentação\Protótipos de telas\consulta_de_temas.png = Documentação\Protótipos de telas\consulta_de_temas.png
+		Documentação\Protótipos de telas\login.png = Documentação\Protótipos de telas\login.png
+		Documentação\Protótipos de telas\pergunta.png = Documentação\Protótipos de telas\pergunta.png
+		Documentação\Protótipos de telas\perguntas.png = Documentação\Protótipos de telas\perguntas.png
+		Documentação\Protótipos de telas\Protótipos.epgz = Documentação\Protótipos de telas\Protótipos.epgz
+		Documentação\Protótipos de telas\rede.png = Documentação\Protótipos de telas\rede.png
+		Documentação\Protótipos de telas\redes.png = Documentação\Protótipos de telas\redes.png
+		Documentação\Protótipos de telas\redes_de_acompanhamento.png = Documentação\Protótipos de telas\redes_de_acompanhamento.png
+		Documentação\Protótipos de telas\resposta.png = Documentação\Protótipos de telas\resposta.png
+		Documentação\Protótipos de telas\respostas.png = Documentação\Protótipos de telas\respostas.png
+		Documentação\Protótipos de telas\tela_principal.png = Documentação\Protótipos de telas\tela_principal.png
+		Documentação\Protótipos de telas\tema.png = Documentação\Protótipos de telas\tema.png
+		Documentação\Protótipos de telas\temas.png = Documentação\Protótipos de telas\temas.png
 	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C59B88DE-0D25-4304-A81C-35B61BFE4A9D} = {F4CEC82F-F1B3-432D-9C1A-B362EA86D2C7}
+		{BF395733-20E2-43AF-9FC2-2509680BBEB2} = {F4CEC82F-F1B3-432D-9C1A-B362EA86D2C7}
+		{36DB66AD-1193-41C6-9AEF-592A95286B9D} = {F4CEC82F-F1B3-432D-9C1A-B362EA86D2C7}
+		{34B72F73-6AE1-455B-BD88-59A61995D736} = {F4CEC82F-F1B3-432D-9C1A-B362EA86D2C7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6C7617AC-E992-4E31-8817-8B97D0DC6F98}

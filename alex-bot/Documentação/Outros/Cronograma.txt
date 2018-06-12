@@ -7,15 +7,15 @@
 	2.3. Carga de dados e treinamento da IA do LUIS	|	2018-04-19
 
 3. Desenvolvimento do Painel administrativo
-	3.1. Manter cadastro de temas;		|	2018-05-03
-	3.2. Manter cadastro de perguntas;	|	2018-05-03
-	3.3. Manter cadastro de respostas;	|	2018-05-03
+	3.1. Manter cadastro de temas;					|	2018-05-03
+	3.2. Manter cadastro de perguntas;				|	2018-05-03
+	3.3. Manter cadastro de respostas;				|	2018-05-03
 	3.4. Manter cadastro de redes de testagem e aconselhamento;	|	2018-05-03
-	3.5. Manter o cadastro de administradores;	|	2018-05-03
+	3.5. Manter o cadastro de administradores;			|	2018-05-03
 	3.6. Manter classificação do conteúdo (adequadas ou não);	|	2018-05-03
  
 4. Desenvolvimento da API do sistema
 	4.1. O sistema deve interagir com o usuário através de texto escrito;	|	2018-05-31
-	4.2. O sistema deve interagir com o usuário através de imagens;	|	2018-05-31
+	4.2. O sistema deve interagir com o usuário através de imagens;		|	2018-05-31
 	4.3. O sistema deve interagir com o usuário através de hiperlinks;	|	2018-05-31
 	4.4. O sistema deve permitir que o usuário envie mensagens de áudio;	|	2018-05-31
