@@ -1,0 +1,36 @@
+﻿@model Administrativo.Models.Resposta
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Resposta</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Descricao)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Descricao)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DataInc)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DataInc)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DataMod)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DataMod)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
