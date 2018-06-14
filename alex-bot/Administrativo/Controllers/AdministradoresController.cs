@@ -54,7 +54,7 @@ namespace Administrativo.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Nome,Login,Senha,Id,DataInc,DataMod")] Administrador administrador)
+        public async Task<IActionResult> Create([Bind("Nome,Email,Login,Senha,Id,DataInc,DataMod")] Administrador administrador)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace Administrativo.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Nome,Login,Senha,Id,DataInc,DataMod")] Administrador administrador)
+        public async Task<IActionResult> Edit(int id, [Bind("Nome,Email,Login,Senha,Id,DataInc,DataMod")] Administrador administrador)
         {
             if (id != administrador.Id)
             {

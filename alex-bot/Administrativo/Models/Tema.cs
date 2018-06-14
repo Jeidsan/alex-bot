@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Administrativo.Models
 {
-    public class Tema :BaseClass
+    public class Tema : BaseClass
     {
         public string Nome { get; set; }
         public string Descricao { get; set; }

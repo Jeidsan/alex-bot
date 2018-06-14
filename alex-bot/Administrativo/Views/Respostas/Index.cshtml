@@ -1,47 +1,43 @@
 ﻿@model IEnumerable<Administrativo.Models.Resposta>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Respostas";
 }
 
-<h2>Index</h2>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Descricao)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.DataInc)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.DataMod)
-                </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Descricao)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataInc)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataMod)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<h2>Respostas</h2>
+
+<div class="card mb-3">
+    <div class="card-header">
+        <a asp-action="Create" class="btn btn-primary"><i class="fa fa-fw fa-file"></i> Novo</a>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th width="10%"></th>
+                        <th>Pergunta</th>
+                        <th>Resposta</th>                        
+                        <th width="15%">Nº de Anexos</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.Id"><i class="fa fa-fw fa-edit"></i></a> |
+                                <a asp-action="Details" asp-route-id="@item.Id"><i class="fa fa-fw fa-envelope-open"></i></a> |
+                                <a asp-action="Delete" asp-route-id="@item.Id"><i class="fa fa-fw fa-remove"></i></a>
+                            </td>
+                            <td>@Html.DisplayFor(modelItem => item.PerguntaId.Descricao)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Descricao)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Anexos.Count())</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

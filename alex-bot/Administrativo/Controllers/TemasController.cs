@@ -34,6 +34,9 @@ namespace Administrativo.Controllers
             }
 
             var tema = await _context.Temas
+                .Include(t => t.IncPor)
+                .Include(t => t.ModPor)
+                .AsNoTracking()
                 .SingleOrDefaultAsync(m => m.Id == id);
             if (tema == null)
             {
@@ -54,13 +57,20 @@ namespace Administrativo.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Nome,Descricao,Id,DataInc,DataMod")] Tema tema)
+        public async Task<IActionResult> Create([Bind("Nome,Descricao,DataInc,DataMod")] Tema tema)
         {
-            if (ModelState.IsValid)
+            try
             {
-                _context.Add(tema);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    _context.Add(tema);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+            }
+            catch (DbUpdateException ex)
+            {
+                ModelState.AddModelError("", "Não foi possível salvar o tema.");
             }
             return View(tema);
         }
@@ -84,40 +94,34 @@ namespace Administrativo.Controllers
         // POST: Temas/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Nome,Descricao,Id,DataInc,DataMod")] Tema tema)
+        public async Task<IActionResult> EditPost(int? id)
         {
-            if (id != tema.Id)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            var tema = await _context.Temas.SingleOrDefaultAsync(t => t.Id == id);
+
+            if (await TryUpdateModelAsync<Tema>(tema, "", t => t.Nome, t => t.Descricao))
             {
                 try
                 {
-                    _context.Update(tema);
                     await _context.SaveChangesAsync();
+                    return RedirectToAction("Index");
                 }
-                catch (DbUpdateConcurrencyException)
+                catch (DbUpdateException ex)
                 {
-                    if (!TemaExists(tema.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    ModelState.AddModelError("", "Não foi possível salvar.");
                 }
-                return RedirectToAction(nameof(Index));
             }
             return View(tema);
         }
 
         // GET: Temas/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int? id, bool? saveChangesError = false)
         {
             if (id == null)
             {
@@ -131,6 +135,11 @@ namespace Administrativo.Controllers
                 return NotFound();
             }
 
+            if (saveChangesError.GetValueOrDefault())
+            {
+                ViewData["ErrorMessage"] = "Não foi possível excluir.";
+            }
+
             return View(tema);
         }
 
@@ -139,10 +148,25 @@ namespace Administrativo.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var tema = await _context.Temas.SingleOrDefaultAsync(m => m.Id == id);
-            _context.Temas.Remove(tema);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            var tema = await _context.Temas
+                .AsNoTracking()
+                .SingleOrDefaultAsync(t => t.Id == id);
+
+            if (tema == null)
+            {
+                return RedirectToAction("Index");
+            }
+
+            try
+            {
+                _context.Temas.Remove(tema);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            catch (DbUpdateException)
+            {
+                return RedirectToAction("Delete", new { id = id, saveChangesError = true });
+            }
         }
 
         private bool TemaExists(int id)
