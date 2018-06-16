@@ -1,54 +1,51 @@
 ﻿@model Administrativo.Models.Administrador
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = $"Administrador - {Model.Nome}";
 }
 
-<h2>Details</h2>
+<h2>Administrador - @Model.Nome</h2>
 
-<div>
-    <h4>Administrador</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Nome)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Nome)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Login)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Login)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Senha)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Senha)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.DataInc)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.DataInc)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.DataMod)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.DataMod)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+
+<div class="card mb-3">
+    <div class="card-header text-right">
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary "><i class="fa fa-fw fa-edit"></i> Editar</a>
+        <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i> Excluir</a>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table" id="dataTable" width="100%" cellspacing="0">
+                <tbody>
+                    <tr>
+                        <td width="15%" align="right">Nome: </td>
+                        <td colspan="3">@Model.Nome</td>
+                    </tr>
+                    <tr>
+                        <td width="15%" align="right">E-mail: </td>
+                        <td colspan="3">@Model.Email</td>
+                    </tr>
+                    <tr>
+                        <td width="15%" align="right">Login: </td>
+                        <td colspan="3">@Model.Login</td>
+                    </tr>
+                    <tr>
+                        <td width="15%" align="right">Cadastrado por: </td>
+                        <td>@Model.IncPor.Nome</td>
+                        <td width="15%" align="right">Cadastrado em: </td>
+                        <td>@Model.DataInc</td>
+                    </tr>
+                    <tr>
+                        <td width="15%" align="right">Modificado por: </td>
+                        <td>@Model.ModPor.Nome</td>
+                        <td width="15%" align="right">Modificado em: </td>
+                        <td>@Model.DataMod</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="card-footer text-right">
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary "><i class="fa fa-fw fa-edit"></i> Editar</a>
+        <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i> Excluir</a>
+    </div>
 </div>

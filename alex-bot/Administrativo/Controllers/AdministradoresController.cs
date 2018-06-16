@@ -34,6 +34,9 @@ namespace Administrativo.Controllers
             }
 
             var administrador = await _context.Administradores
+                .Include(t => t.IncPor)
+                .Include(t => t.ModPor)
+                .AsNoTracking()
                 .SingleOrDefaultAsync(m => m.Id == id);
             if (administrador == null)
             {
@@ -56,11 +59,18 @@ namespace Administrativo.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Nome,Email,Login,Senha,Id,DataInc,DataMod")] Administrador administrador)
         {
-            if (ModelState.IsValid)
+            try
             {
-                _context.Add(administrador);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    _context.Add(administrador);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+            }
+            catch (DbUpdateException ex)
+            {
+                ModelState.AddModelError("", "Não foi possível salvar o tema.");
             }
             return View(administrador);
         }
@@ -84,40 +94,41 @@ namespace Administrativo.Controllers
         // POST: Administradores/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Nome,Email,Login,Senha,Id,DataInc,DataMod")] Administrador administrador)
+        public async Task<IActionResult> EditPost(int? id)
         {
-            if (id != administrador.Id)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            var administrador = await _context.Administradores.SingleOrDefaultAsync(t => t.Id == id);
+
+            if (await TryUpdateModelAsync<Administrador>(administrador,
+                "", 
+                a => a.Nome, 
+                a => a.Email,                
+                a => a.DataMod,
+                a => a.ModPor,
+                a => a.Login
+                ))
             {
                 try
                 {
-                    _context.Update(administrador);
                     await _context.SaveChangesAsync();
+                    return RedirectToAction("Index");
                 }
-                catch (DbUpdateConcurrencyException)
+                catch (DbUpdateException ex)
                 {
-                    if (!AdministradorExists(administrador.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    ModelState.AddModelError("", "Não foi possível salvar.");
                 }
-                return RedirectToAction(nameof(Index));
             }
             return View(administrador);
         }
 
         // GET: Administradores/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int? id, bool? saveChangesError = false)
         {
             if (id == null)
             {
@@ -125,10 +136,18 @@ namespace Administrativo.Controllers
             }
 
             var administrador = await _context.Administradores
+                .Include(t => t.IncPor)
+                .Include(t => t.ModPor)
+                .AsNoTracking()
                 .SingleOrDefaultAsync(m => m.Id == id);
             if (administrador == null)
             {
                 return NotFound();
+            }
+
+            if (saveChangesError.GetValueOrDefault())
+            {
+                ViewData["ErrorMessage"] = "Não foi possível excluir.";
             }
 
             return View(administrador);
@@ -139,10 +158,25 @@ namespace Administrativo.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var administrador = await _context.Administradores.SingleOrDefaultAsync(m => m.Id == id);
-            _context.Administradores.Remove(administrador);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            var administrador = await _context.Administradores
+                .AsNoTracking()
+                .SingleOrDefaultAsync(m => m.Id == id);
+
+            if (administrador == null)
+            {
+                return RedirectToAction("Index");
+            }
+
+            try
+            {
+                _context.Administradores.Remove(administrador);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            catch(DbUpdateException)
+            {
+                return RedirectToAction("Delete", new { id = id, saveChangesError = true });
+            }
         }
 
         private bool AdministradorExists(int id)
