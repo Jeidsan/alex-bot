@@ -129,6 +129,9 @@ namespace Administrativo.Controllers
             }
 
             var tema = await _context.Temas
+                .Include(t => t.IncPor)
+                .Include(t => t.ModPor)
+                .AsNoTracking()
                 .SingleOrDefaultAsync(m => m.Id == id);
             if (tema == null)
             {
@@ -148,7 +151,7 @@ namespace Administrativo.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var tema = await _context.Temas
+            var tema = await _context.Temas 
                 .AsNoTracking()
                 .SingleOrDefaultAsync(t => t.Id == id);
 
