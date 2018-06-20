@@ -85,7 +85,8 @@ namespace Administrativo.Controllers
             {
                 ModelState.AddModelError("", "Não foi possível salvar a resposta.");
             }
-            PopulatePerguntasDropDownList(resposta.PerguntaId);
+            PopulatePerguntasDropDownList(resposta.PerguntaId);          
+
             return View(resposta);
         }
 

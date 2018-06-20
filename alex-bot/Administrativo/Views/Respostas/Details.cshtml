@@ -39,49 +39,50 @@
                 </tbody>
             </table>
         </div>
-
-        <h4>Anexos</h4>
-        <div class="card mb-4">
-            <div class="card-header">
-                <a asp-controller="Anexos" asp-action="Create" class="btn btn-primary"><i class="fa fa-fw fa-file"></i> Novo</a>
-            </div>
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                        <thead>
-                            <tr>
-                                <th width="10%"></th>
-                                <th>Legenda</th>
-                                <th>Descrição</th>                               
-                                <th width="10%">Adequada</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @if (Model.QuantidadeAnexos > 0)
-                            {
-                                @foreach (var item in Model.Anexos)
+        <!--
+                    TODO: Jeidsan: Removida no MVP
+            <h4>Anexos</h4>
+            <div class="card mb-4">
+                <div class="card-header">
+                    <a asp-controller="Anexos" asp-action="Create" class="btn btn-primary"><i class="fa fa-fw fa-file"></i> Novo</a>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th width="10%"></th>
+                                    <th>Legenda</th>
+                                    <th>Descrição</th>
+                                    <th width="10%">Adequada</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.QuantidadeAnexos > 0)
                                 {
-                                    <tr>
-                                        <td>
-                                            <a asp-controller="Anexos" asp-action="Details" asp-route-id="@item.Id"><i class="fa fa-fw fa-eye"></i></a> |
-                                            <a asp-controller="Anexos" asp-action="Edit" asp-route-id="@item.Id"><i class="fa fa-fw fa-edit"></i></a> |
-                                            <a asp-controller="Anexos" asp-action="Delete" asp-route-id="@item.Id"><i class="fa fa-fw fa-remove"></i></a>
-                                        </td>                                       
-                                        <td>@Html.DisplayFor(modelItem => item.Legenda)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.Descricao)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.Adequada)</td>
-                                    </tr>
+                                    @foreach (var item in Model.Anexos)
+                                    {
+                                        <tr>
+                                            <td>
+                                                <a asp-controller="Anexos" asp-action="Details" asp-route-id="@item.Id"><i class="fa fa-fw fa-eye"></i></a> |
+                                                <a asp-controller="Anexos" asp-action="Edit" asp-route-id="@item.Id"><i class="fa fa-fw fa-edit"></i></a> |
+                                                <a asp-controller="Anexos" asp-action="Delete" asp-route-id="@item.Id"><i class="fa fa-fw fa-remove"></i></a>
+                                            </td>
+                                            <td>@Html.DisplayFor(modelItem => item.Legenda)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.Descricao)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.Adequada)</td>
+                                        </tr>
+                                    }
                                 }
-                            }
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
+            -->
         </div>
-
+        <div class="card-footer text-right">
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary "><i class="fa fa-fw fa-edit"></i> Editar</a>
+            <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i> Excluir</a>
+        </div>
     </div>
-    <div class="card-footer text-right">
-        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary "><i class="fa fa-fw fa-edit"></i> Editar</a>
-        <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i> Excluir</a>
-    </div>
-</div>

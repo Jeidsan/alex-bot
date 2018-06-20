@@ -18,9 +18,13 @@
                     <tr>
                         <th width="10%"></th>
                         <th>Pergunta</th>
-                        <th>Resposta</th>                        
+                        <th>Resposta</th>
+                        <!--
+                        TODO: Jeidsan: Removida no MVP
                         <th width="15%">Nº de Anexos</th>
+                        -->
                     </tr>
+
                 </thead>
                 <tbody>
                     @foreach (var item in Model)
@@ -33,7 +37,10 @@
                             </td>
                             <td>@Html.DisplayFor(modelItem => item.Pergunta.Descricao)</td>
                             <td>@Html.DisplayFor(modelItem => item.Descricao)</td>
+                            <!--
+                            TODO: Jeidsan: Removida no MVP
                             <td>@Html.DisplayFor(modelItem => item.QuantidadeAnexos)</td>
+                            -->
                         </tr>
                     }
                 </tbody>
