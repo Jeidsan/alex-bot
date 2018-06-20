@@ -24,6 +24,7 @@ namespace Administrativo.Controllers
         {
             var perguntas = _context.Perguntas
                 .Include(p => p.Tema)
+                .Include(p => p.Respostas)
                 .AsNoTracking();
             return View(await perguntas.ToListAsync());
         }
@@ -40,6 +41,7 @@ namespace Administrativo.Controllers
                 .Include(p => p.IncPor)
                 .Include(p => p.ModPor)
                 .Include(p => p.Tema)
+                .Include(p => p.Respostas)
                 .AsNoTracking()
                 .SingleOrDefaultAsync(m => m.Id == id);
             if (pergunta == null)
@@ -58,10 +60,7 @@ namespace Administrativo.Controllers
         }
 
         private void PopulateTemasDropDownList(object selectedTema = null)
-        {
-            //var temaQuery = from t in _context.Temas
-            //                orderby t.Nome
-            //                select t;
+        {           
             ViewBag.TemaId = new SelectList(_context.Temas.OrderBy(t => t.Nome).AsNoTracking().ToList(), "Id", "Nome", selectedTema);
         }
 
@@ -134,7 +133,7 @@ namespace Administrativo.Controllers
                 }
                 catch (DbUpdateException)
                 {
-                    ModelState.AddModelError("", "Não foi possível salvar.");
+                    ModelState.AddModelError("", "Não foi possível salvar a pergunta.");
                 }
             }
             PopulateTemasDropDownList(pergunta.TemaId);
@@ -162,7 +161,7 @@ namespace Administrativo.Controllers
 
             if (saveChangesError.GetValueOrDefault())
             {
-                ViewData["ErrorMessage"] = "Não foi possível excluir.";
+                ViewData["ErrorMessage"] = "Não foi possível excluir a pergunta.";
             }
 
             return View(pergunta);
@@ -179,7 +178,7 @@ namespace Administrativo.Controllers
 
             if (pergunta == null)
             {
-                return RedirectToAction("Index");
+                return RedirectToAction(nameof(Index));
             }
 
             try

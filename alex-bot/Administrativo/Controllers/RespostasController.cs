@@ -22,7 +22,11 @@ namespace Administrativo.Controllers
         // GET: Respostas
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Respostas.ToListAsync());
+            var respostas = _context.Respostas
+                .Include(r => r.Pergunta)
+                .Include(r => r.Anexos)
+                .AsNoTracking();
+            return View(await respostas.ToListAsync());
         }
 
         // GET: Respostas/Details/5
@@ -34,6 +38,11 @@ namespace Administrativo.Controllers
             }
 
             var resposta = await _context.Respostas
+                .Include(r => r.IncPor)
+                .Include(r => r.ModPor)
+                .Include(r => r.Pergunta)
+                .Include(r => r.Anexos)
+                .AsNoTracking()
                 .SingleOrDefaultAsync(m => m.Id == id);
             if (resposta == null)
             {
@@ -46,7 +55,13 @@ namespace Administrativo.Controllers
         // GET: Respostas/Create
         public IActionResult Create()
         {
+            PopulatePerguntasDropDownList();
             return View();
+        }
+
+        private void PopulatePerguntasDropDownList(object selectedPergunta = null)
+        {
+            ViewBag.PerguntaId = new SelectList(_context.Perguntas.OrderBy(p => p.Descricao).AsNoTracking(), "Id", "Descricao", selectedPergunta);
         }
 
         // POST: Respostas/Create
@@ -54,14 +69,23 @@ namespace Administrativo.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Descricao,Id,DataInc,DataMod")] Resposta resposta)
+        public async Task<IActionResult> Create([Bind("PerguntaId,Descricao")] Resposta resposta)
         {
-            if (ModelState.IsValid)
+            try
             {
-                _context.Add(resposta);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    resposta.DataMod = DateTime.Now;
+                    _context.Add(resposta);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
             }
+            catch (DbUpdateException)
+            {
+                ModelState.AddModelError("", "Não foi possível salvar a resposta.");
+            }
+            PopulatePerguntasDropDownList(resposta.PerguntaId);
             return View(resposta);
         }
 
@@ -73,51 +97,53 @@ namespace Administrativo.Controllers
                 return NotFound();
             }
 
-            var resposta = await _context.Respostas.SingleOrDefaultAsync(m => m.Id == id);
+            var resposta = await _context.Respostas
+                .AsNoTracking()
+                .SingleOrDefaultAsync(m => m.Id == id);
             if (resposta == null)
             {
                 return NotFound();
             }
+            PopulatePerguntasDropDownList(resposta.PerguntaId);
             return View(resposta);
         }
 
         // POST: Respostas/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Descricao,Id,DataInc,DataMod")] Resposta resposta)
+        public async Task<IActionResult> EditPost(int? id)
         {
-            if (id != resposta.Id)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            var resposta = await _context.Respostas.SingleOrDefaultAsync(r => r.Id == id);
+            
+            if(await TryUpdateModelAsync<Resposta>(resposta,
+                "",
+                r => r.Descricao, 
+                r => r.PerguntaId, 
+                r => r.DataMod))
             {
                 try
                 {
-                    _context.Update(resposta);
                     await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
                 }
-                catch (DbUpdateConcurrencyException)
+                catch(DbUpdateException)
                 {
-                    if (!RespostaExists(resposta.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    ModelState.AddModelError("", "Não foi possível salvar a resposta.");
                 }
-                return RedirectToAction(nameof(Index));
             }
+            PopulatePerguntasDropDownList(resposta.PerguntaId);
             return View(resposta);
         }
 
         // GET: Respostas/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int? id, bool? saveChangesError = false)
         {
             if (id == null)
             {
@@ -125,10 +151,19 @@ namespace Administrativo.Controllers
             }
 
             var resposta = await _context.Respostas
-                .SingleOrDefaultAsync(m => m.Id == id);
+                .Include(p => p.IncPor)
+                .Include(p => p.ModPor)
+                .Include(p => p.Pergunta)
+                .AsNoTracking()
+                .SingleOrDefaultAsync(m => m.Id == id);  
             if (resposta == null)
             {
                 return NotFound();
+            }
+
+            if (saveChangesError.GetValueOrDefault())
+            {
+                ViewData["ErrorMessage"] = "Não foi possível excluir a resposta.";
             }
 
             return View(resposta);
@@ -139,10 +174,25 @@ namespace Administrativo.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var resposta = await _context.Respostas.SingleOrDefaultAsync(m => m.Id == id);
-            _context.Respostas.Remove(resposta);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            var resposta = await _context.Respostas
+                .AsNoTracking()
+                .SingleOrDefaultAsync(m => m.Id == id);
+
+            if (resposta == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
+            try
+            {
+                _context.Respostas.Remove(resposta);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            catch (DbUpdateException)
+            {
+                return RedirectToAction("Delete", new { id = id, saveChandesError = true });
+            }
         }
 
         private bool RespostaExists(int id)

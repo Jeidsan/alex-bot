@@ -1,39 +1,49 @@
 ﻿@model Administrativo.Models.Resposta
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = $"Resposta - {Model.Id}";
 }
 
-<h2>Delete</h2>
+<h2>Resposta - @Model.Id</h2>
+<p class="text-danger">@ViewData["ErrorMessage"]</p>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Resposta</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Descricao)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Descricao)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.DataInc)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.DataInc)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.DataMod)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.DataMod)
-        </dd>
-    </dl>
-    
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Delete" class="btn btn-default" /> |
-        <a asp-action="Index">Back to List</a>
-    </form>
+<div class="card mb-3">
+    <div class="card-header">
+        <span><b>Deseja realmente excluir esta resposta?</b></span>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table" id="dataTable" width="100%" cellspacing="0">
+                <tbody>
+                    <tr>
+                        <td width="15%" align="right">@Html.DisplayNameFor(p => p.Pergunta) </td>
+                        <td colspan="3">@Model.Pergunta?.Descricao</td>
+                    </tr>
+                    <tr>
+                        <td width="15%" align="right">@Html.DisplayNameFor(p => p.Descricao) </td>
+                        <td colspan="3">@Model.Descricao</td>
+                    </tr>
+                    <tr>
+                        <td width="15%" align="right">@Html.DisplayNameFor(p => p.IncPor)</td>
+                        <td>@Model.IncPor?.Nome</td>
+                        <td width="15%" align="right">@Html.DisplayNameFor(p => p.DataInc)</td>
+                        <td>@Model.DataInc</td>
+                    </tr>
+                    <tr>
+                        <td width="15%" align="right">@Html.DisplayNameFor(p => p.ModPor)</td>
+                        <td>@Model.ModPor?.Nome</td>
+                        <td width="15%" align="right">@Html.DisplayNameFor(p => p.DataMod)</td>
+                        <td>@Model.DataMod</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="card-footer text-right">
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="Id" />
+            <a asp-action="Index" class="btn btn-primary"><i class="fa fa-fw fa-undo"></i> Cancelar</a>
+            <button type="submit" class="btn btn-danger"><i class="fa fa-fw fa-save"></i> Excluir</button>
+        </form>
+    </div>
 </div>
