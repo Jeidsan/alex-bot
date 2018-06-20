@@ -1,36 +1,85 @@
 ﻿@model Administrativo.Models.Pergunta
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = $"Perguntas";
 }
 
-<h2>Details</h2>
+<h2>Pergunta - @Model.Id</h2>
 
-<div>
-    <h4>Pergunta</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Descricao)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Descricao)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.DataInc)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.DataInc)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.DataMod)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.DataMod)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+
+<div class="card mb-3">
+    <div class="card-header text-right">
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary "><i class="fa fa-fw fa-edit"></i> Editar</a>
+        <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i> Excluir</a>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table" id="dataTable" width="100%" cellspacing="0">
+                <tbody>
+                    <tr>
+                        <td width="15%" align="right">@Html.DisplayNameFor(p => p.Tema) </td>
+                        <td colspan="3">@Model.Tema?.Nome</td>
+                    </tr>
+                    <tr>
+                        <td width="15%" align="right">@Html.DisplayNameFor(p => p.Descricao) </td>
+                        <td colspan="3">@Model.Descricao</td>
+                    </tr>
+                    <tr>
+                        <td width="15%" align="right">@Html.DisplayNameFor(p => p.IncPor)</td>
+                        <td>@Model.IncPor?.Nome</td>
+                        <td width="15%" align="right">@Html.DisplayNameFor(p => p.DataInc)</td>
+                        <td>@Model.DataInc</td>
+                    </tr>
+                    <tr>
+                        <td width="15%" align="right">@Html.DisplayNameFor(p => p.ModPor)</td>
+                        <td>@Model.ModPor?.Nome</td>
+                        <td width="15%" align="right">@Html.DisplayNameFor(p => p.DataMod)</td>
+                        <td>@Model.DataMod</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h4>Respostas</h4>
+        <div class="card mb-4">
+            <div class="card-header">
+                <a asp-controller="Respostas" asp-action="Create" class="btn btn-primary"><i class="fa fa-fw fa-file"></i> Novo</a>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th width="10%"></th>
+                                <th>Descrição</th>
+                                <th width="15%">Nº de Anexos</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.QuantidadeRespostas > 0)
+                            {
+                                @foreach (var item in Model.Respostas)
+                                {
+                                    <tr>
+                                        <td>
+                                            <a asp-controller="Respostas" asp-action="Details" asp-route-id="@item.Id"><i class="fa fa-fw fa-eye"></i></a> |
+                                            <a asp-controller="Respostas" asp-action="Edit" asp-route-id="@item.Id"><i class="fa fa-fw fa-edit"></i></a> |
+                                            <a asp-controller="Respostas" asp-action="Delete" asp-route-id="@item.Id"><i class="fa fa-fw fa-remove"></i></a>
+                                        </td>
+                                        <td>@Html.DisplayFor(modelItem => item.Descricao)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.QuantidadeAnexos)</td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="card-footer text-right">
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary "><i class="fa fa-fw fa-edit"></i> Editar</a>
+        <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i> Excluir</a>
+    </div>
 </div>

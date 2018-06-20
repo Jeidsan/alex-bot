@@ -4,8 +4,6 @@
     ViewData["Title"] = "Perguntas";
 }
 
-
-
 <h2>Perguntas</h2>
 
 <div class="card mb-3">
@@ -18,8 +16,9 @@
                 <thead>
                     <tr>
                         <th width="10%"></th>
-                        <th>Pergunta</th>
-                        <th width="15%">Nº de respostas</th>
+                        <th>@Html.DisplayNameFor(p => p.Tema)</th>
+                        <th>@Html.DisplayNameFor(p => p.Descricao)</th>
+                        <th width="15%">@Html.DisplayNameFor(p => p.QuantidadeRespostas)</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -31,8 +30,9 @@
                                 <a asp-action="Edit" asp-route-id="@item.Id"><i class="fa fa-fw fa-edit"></i></a> |
                                 <a asp-action="Delete" asp-route-id="@item.Id"><i class="fa fa-fw fa-remove"></i></a>
                             </td>
+                            <td>@Html.DisplayFor(modelItem => item.Tema.Nome)</td>
                             <td>@Html.DisplayFor(modelItem => item.Descricao)</td>
-                            <td>@Html.DisplayFor(modelItem => item.Respostas.Count())</td>
+                            <td>@Html.DisplayFor(modelItem => item.QuantidadeRespostas)</td>
                         </tr>
                     }
                 </tbody>

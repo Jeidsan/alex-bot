@@ -34,8 +34,6 @@ namespace Administrativo.Controllers
             }
 
             var administrador = await _context.Administradores
-                .Include(t => t.IncPor)
-                .Include(t => t.ModPor)
                 .AsNoTracking()
                 .SingleOrDefaultAsync(m => m.Id == id);
             if (administrador == null)
@@ -109,8 +107,6 @@ namespace Administrativo.Controllers
                 "", 
                 a => a.Nome, 
                 a => a.Email,                
-                a => a.DataMod,
-                a => a.ModPor,
                 a => a.Login
                 ))
             {
@@ -136,8 +132,6 @@ namespace Administrativo.Controllers
             }
 
             var administrador = await _context.Administradores
-                .Include(t => t.IncPor)
-                .Include(t => t.ModPor)
                 .AsNoTracking()
                 .SingleOrDefaultAsync(m => m.Id == id);
             if (administrador == null)

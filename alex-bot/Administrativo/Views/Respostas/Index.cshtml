@@ -31,9 +31,9 @@
                                 <a asp-action="Edit" asp-route-id="@item.Id"><i class="fa fa-fw fa-edit"></i></a> |
                                 <a asp-action="Delete" asp-route-id="@item.Id"><i class="fa fa-fw fa-remove"></i></a>
                             </td>
-                            <td>@Html.DisplayFor(modelItem => item.PerguntaId.Descricao)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Pergunta.Descricao)</td>
                             <td>@Html.DisplayFor(modelItem => item.Descricao)</td>
-                            <td>@Html.DisplayFor(modelItem => item.Anexos.Count())</td>
+                            <td>@Html.DisplayFor(modelItem => item.QuantidadeAnexos)</td>
                         </tr>
                     }
                 </tbody>

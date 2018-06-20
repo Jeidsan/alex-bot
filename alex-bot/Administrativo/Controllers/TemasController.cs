@@ -166,7 +166,7 @@ namespace Administrativo.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            catch (DbUpdateException)
+            catch (DbUpdateException ex)
             {
                 return RedirectToAction("Delete", new { id = id, saveChangesError = true });
             }
