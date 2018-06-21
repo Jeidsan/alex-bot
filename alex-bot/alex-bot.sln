@@ -55,7 +55,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Protótipos de telas", "Pro
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Administrativo", "Administrativo\Administrativo.csproj", "{FCC59DC4-0BBC-4729-AB25-6A9FF1661200}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Conversacional", "Conversacional\Conversacional.csproj", "{B666E18A-37CB-4CF2-A2AF-5A379806DAF0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Conversacional", "Conversacional\Conversacional.csproj", "{9C7E3A46-B60F-4052-9A21-DC8D1A942216}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -67,10 +67,10 @@ Global
 		{FCC59DC4-0BBC-4729-AB25-6A9FF1661200}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FCC59DC4-0BBC-4729-AB25-6A9FF1661200}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FCC59DC4-0BBC-4729-AB25-6A9FF1661200}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B666E18A-37CB-4CF2-A2AF-5A379806DAF0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B666E18A-37CB-4CF2-A2AF-5A379806DAF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B666E18A-37CB-4CF2-A2AF-5A379806DAF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B666E18A-37CB-4CF2-A2AF-5A379806DAF0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C7E3A46-B60F-4052-9A21-DC8D1A942216}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C7E3A46-B60F-4052-9A21-DC8D1A942216}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C7E3A46-B60F-4052-9A21-DC8D1A942216}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C7E3A46-B60F-4052-9A21-DC8D1A942216}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

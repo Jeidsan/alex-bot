@@ -13,7 +13,7 @@ namespace Administrativo.Models
         public int TemaId { get; set; }
 
         [DisplayName("Tema")]
-        public virtual Tema Tema { get; set; }
+        public Tema Tema { get; set; }
 
         [DisplayName("Descrição")]
         [Required(ErrorMessage = "É necessário informar uma descrição para a pergunta.")]
