@@ -14,16 +14,10 @@ namespace Administrativo.Data
 
             if (context.Administradores.Any()) return;
 
-            // Adicionando Administradores
             var administrador = new Administrador() { Nome = "Joao da Silva", Login = "joao.silva", Senha = "123" };   
-            var administradores = new Administrador[]
-            {
-                administrador,
-                new Administrador() { Nome = "Jorge Paulo Lacerda", Login = "jorge.lacerda", Senha = "123" }
-            };
-            context.Administradores.AddRange(administradores);
+            context.Administradores.Add(administrador);
             context.SaveChanges();
-
+            /*
             // Adicionando os Temas
             var tema = new Tema() { IncPor = administrador, DataInc = DateTime.Now, ModPor = administrador, DataMod = DateTime.Now, Nome = "Infecção", Descricao = "Infecções Sexualmente Transmissíveis" };
             var temas = new Tema[]
@@ -52,7 +46,7 @@ namespace Administrativo.Data
             };
             context.Respostas.AddRange(respostas);
             context.SaveChanges();
-
+            */
             //Estados
             var estados = new Estado[]
             {

@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Administrativo.Data;
+using Administrativo.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Administrativo.Models;
-using Administrativo.Data;
 
 namespace Administrativo.Controllers
 {
@@ -45,6 +45,19 @@ namespace Administrativo.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        public async Task<IActionResult> Atualizar()
+        {
+
+            var respostas = _context.Respostas
+                .Include(r => r.Pergunta)
+                    .ThenInclude(p => p.Tema);
+            var erro = await AlexUpdater.Atualizar(respostas.ToList());
+
+            ViewData["Erro"] = erro;
+  
+            return RedirectToAction(nameof(Index));
         }
     }
 }
